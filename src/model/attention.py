@@ -7,7 +7,7 @@ from PIL import Image
 from torchvision import transforms
 from torchvision import utils as vutils
 from model import common
-from utils.tools import extract_image_patches,\
+from model.utils.tools import extract_image_patches,\
     reduce_mean, reduce_sum, same_padding
 
 #in-scale non-local attention
