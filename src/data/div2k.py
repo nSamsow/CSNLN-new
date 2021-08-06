@@ -29,4 +29,3 @@ class DIV2K(srdata.SRData):
         self.dir_hr = os.path.join(self.apath, 'DIV2K_train_HR')
         self.dir_lr = os.path.join(self.apath, 'DIV2K_train_LR_bicubic')
         if self.input_large: self.dir_lr += 'L'
-

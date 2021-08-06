@@ -17,7 +17,8 @@ class EDSR(nn.Module):
         n_feats = args.n_feats
         kernel_size = 3 
         scale = args.scale[0]
-        act = nn.PReLU(True)
+        # act = nn.PReLU(True)
+        act = nn.PReLU()
 
         rgb_mean = (0.4488, 0.4371, 0.4040)
         rgb_std = (1.0, 1.0, 1.0)

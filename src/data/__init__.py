@@ -22,7 +22,9 @@ class Data:
                 module_name = d if d.find('DIV2K-Q') < 0 else 'DIV2KJPEG'
                 m = import_module('data.' + module_name.lower())
                 datasets.append(getattr(m, module_name)(args, name=d))
-
+                # print(module_name)
+            # print(datasets)
+            # print(len(datasets[0]))
             self.loader_train = dataloader.DataLoader(
                 MyConcatDataset(datasets),
                 batch_size=args.batch_size,
@@ -40,6 +42,8 @@ class Data:
                 module_name = d if d.find('DIV2K-Q') < 0 else 'DIV2KJPEG'
                 m = import_module('data.' + module_name.lower())
                 testset = getattr(m, module_name)(args, train=False, name=d)
+                print(module_name)
+                print(len(testset))
 
             self.loader_test.append(
                 dataloader.DataLoader(

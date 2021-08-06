@@ -17,4 +17,3 @@ class DIV2KJPEG(div2k.DIV2K):
         )
         if self.input_large: self.dir_lr += 'L'
         self.ext = ('.png', '.jpg')
-

@@ -1,0 +1,10 @@
+/.vscode
+/data
+/env
+/experiment/CSNLN_x2
+/experiment/RCAN_BIX2_G10R20P48
+/experiment/test
+/Figs
+/models
+*/__pycache__
+*.pyc

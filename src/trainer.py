@@ -1,12 +1,14 @@
-import os
 import math
+import os
 from decimal import Decimal
 
-import utility
-
+import imageio
 import torch
 import torch.nn.utils as utils
 from tqdm import tqdm
+
+import utility
+
 
 class Trainer():
     def __init__(self, args, loader, my_model, my_loss, ckp):
@@ -82,7 +84,8 @@ class Trainer():
         self.model.eval()
 
         timer_test = utility.timer()
-        if self.args.save_results: self.ckp.begin_background()
+        if self.args.save_results:
+            self.ckp.begin_background()
         for idx_data, d in enumerate(self.loader_test):
             for idx_scale, scale in enumerate(self.scale):
                 d.dataset.set_scale(idx_scale)
@@ -100,6 +103,14 @@ class Trainer():
 
                     if self.args.save_results:
                         self.ckp.save_results(d, filename[0], save_list, scale)
+                    
+                    ###
+                    postfix = ('SR', 'LR', 'HR')
+                    for v, p in zip(save_list, postfix):
+                        normalized = v[0].mul(255 / self.args.rgb_range)
+                        tensor_cpu = normalized.byte().permute(1, 2, 0).cpu()
+                        imageio.imwrite(('..\\experiment\\test\\results-{}\\{}_x{}_{}.png'.format(d.dataset.name,filename[0],scale, p)), tensor_cpu.numpy())
+                    ###
 
                 self.ckp.log[-1, idx_data, idx_scale] /= len(d)
                 best = self.ckp.log.max(0)
